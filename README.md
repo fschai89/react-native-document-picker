@@ -30,6 +30,13 @@ rnpm link
 3. Add `libRNDocumentPicker.a` to `Build Phases -> Link Binary With Libraries`
    [(Screenshot)](http://url.brentvatne.ca/17Xfe).
 
+**CocoaPods**
+
+Add the following to your podfile:
+```
+pod 'react-native-document-picker', :path => '../node_modules/react-native-document-picker`
+```
+
 ### Android
 
 ```gradle
@@ -80,8 +87,14 @@ import { DocumentPicker, DocumentPickerUtil } from 'react-native-document-picker
 // iPhone/Android
 DocumentPicker.show({
       filetype: [DocumentPickerUtil.images()],
-    },(error,url) => {
-      alert(url);
+    },(error,res) => {
+      // Android
+      console.log(
+         res.uri,
+         res.type, // mime type
+         res.fileName,
+         res.fileSize
+      );
     });
 
 // iPad
@@ -181,6 +194,12 @@ RNFS.uploadFiles({
        console.log(err);
     });
 ```
+## File Type 
+***All type of Files*** ``` 'public.allFiles' or DocumentPickerUtil.allFiles()```<br/> 
+***Only PDF*** ``` 'public.pdf' or DocumentPickerUtil.pdf() ``` <br/> 
+***Audio*** ``` 'public.audio' or DocumentPickerUtil.audio()``` <br/> 
+***Plain Text*** ``` 'public.plainText' or DocumentPickerUtil.plainText() ``` <br/> 
+
 ## Reminder
 
 You need to enable iCloud Documents to access iCloud
